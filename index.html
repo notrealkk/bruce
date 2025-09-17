@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent A Night With Bruce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #fdbb2d;
+        }
+        
+        .bruce-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            margin: 0 auto 30px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: #fff;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .profile, .booking {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            color: #fdbb2d;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #fdbb2d;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .skill {
+            background: #fdbb2d;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .reviews {
+            margin-top: 30px;
+        }
+        
+        .review {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer {
+            font-weight: bold;
+            color: #fdbb2d;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        button {
+            background: #fdbb2d;
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: #ffcc44;
+            transform: scale(1.02);
+        }
+        
+        .price {
+            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #fdbb2d;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .confirmation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(253, 187, 45, 0.8);
+            z-index: 100;
+            text-align: center;
+            max-width: 90%;
+            width: 500px;
+        }
+        
+        .confirmation h2 {
+            color: #fdbb2d;
+            margin-bottom: 20px;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 99;
+        }
+        
+        .close-btn {
+            background: #fdbb2d;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rent A Night With Bruce</h1>
+            <p class="tagline">An unforgettable experience with a mysterious kundan</p>
+            <div class="bruce-img">🧔</div>
+        </header>
+        
+        <div class="content">
+            <div class="profile">
+                <h2>About Bruce</h2>
+                <p>Bruce is a kundan of mystery, charm, and many talents. With decades of life experience, he's the perfect companion for your marvelous nigh.</p>
+                
+                <h3>Bruce's Skills</h3>
+                <div class="skills">
+                    <span class="skill">Kuninj Tharum</span>
+                    <span class="skill">Kedann Tharum</span>
+                    <span class="skill">Guitar</span>
+                    <span class="skill">100k for anything</span>
+                    <span class="skill">Singing</span>
+                    <span class="skill">Oombi Tharum</span>
+                </div>
+                
+                <h3>What to Expect</h3>
+                <p>Onnum Expect cheyyanda full unexpected aan.</p>
+                
+                <div class="reviews">
+                    <h3>Client Reviews</h3>
+                    <div class="review">
+                        <p class="reviewer">Sulaiman. ⭐⭐⭐⭐⭐</p>
+                        <p>"Bruce inte thula nalla veluppam aan sesky"</p>
+                    </div>
+                    <div class="review">
+                        <p class="reviewer">Michael T. ⭐⭐⭐⭐</p>
+                        <p>"Bruce inte thula oru car kerunna guha aan."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="booking">
+                <h2>Book Your Night</h2>
+                <p>Fill out the form below to request a night with Bruce. We'll respond within 24 hours to confirm availability.</p>
+                
+                <div class="price">$299 <span style="font-size: 1rem;">per night</span></div>
+                
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Preferred Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <select id="duration" required>
+                            <option value="3">3 hours</option>
+                            <option value="4">4 hours</option>
+                            <option value="5">5 hours</option>
+                            <option value="6">6 hours (all night)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occasion">Occasion</label>
+                        <select id="occasion" required>
+                            <option value="party">Party</option>
+                            <option value="date">Date</option>
+                            <option value="event">Special Event</option>
+                            <option value="business">Business Function</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Special Requests</label>
+                        <textarea id="message"></textarea>
+                    </div>
+                    
+                    <button type="submit">Submit Booking Request</button>
+                </form>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Rent A Night With Bruce. All rights reserved. | This service is for entertainment purposes only.</p>
+        </footer>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="confirmation" id="confirmation">
+        <h2>Booking Request Received!</h2>
+        <p>Thank you for your interest in spending a night with Bruce.</p>
+        <p>We've received your request and will contact you within 24 hours to confirm availability and details.</p>
+        <p>Get ready for an unforgettable experience!</p>
+        <button class="close-btn" onclick="closeConfirmation()">Close</button>
+    </div>
+
+    <script>
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showConfirmation();
+        });
+        
+        function showConfirmation() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('confirmation').style.display = 'block';
+        }
+        
+        function closeConfirmation() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'none';
+            document.getElementById('booking-form').reset();
+        }
+        
+        // Set minimum date to today
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1;
+        let dd = today.getDate();
+        
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+        
+        const formattedToday = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('date').setAttribute('min', formattedToday);
+    </script>
+</body>
+</html>
